@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DBT_PROFILES_DIR: ./dbt/car_shopping_analytics
+      DBT_PROFILES_DIR: ${{ github.workspace }}/dbt/car_shopping_analytics
 
     steps:
       - name: Checkout repository
@@ -70,4 +70,4 @@ jobs:
 
       - name: Parse dbt project
         working-directory: dbt/car_shopping_analytics
-        run: dbt parse
+        run: dbt parse --profiles-dir "$DBT_PROFILES_DIR"

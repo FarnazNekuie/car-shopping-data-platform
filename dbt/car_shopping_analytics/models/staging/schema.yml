@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_vehicle_listings
+    description: Cleaned vehicle listing data from the raw automotive dataset.
+    columns:
+      - name: vin
+        tests:
+          - not_null
+
+      - name: ask_price
+        tests:
+          - not_null
+
+      - name: model_year
+        tests:
+          - not_null
+
+      - name: brand_name
+        tests:
+          - not_null
+
+      - name: dealer_id
+        tests:
+          - not_null

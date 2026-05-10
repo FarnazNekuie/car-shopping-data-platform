@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw
+    database: CAR_SHOPPING_ANALYTICS
+    schema: RAW
+    tables:
+      - name: vehicle_listings_raw
+        identifier: VEHICLE_LISTINGS_RAW

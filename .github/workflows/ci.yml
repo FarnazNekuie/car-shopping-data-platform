@@ -1,0 +1,52 @@
+name: Data Platform CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  terraform-check:
+    name: Terraform Format and Validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform fmt
+        working-directory: terraform
+        run: terraform fmt -check
+
+      - name: Terraform init
+        working-directory: terraform
+        run: terraform init -backend=false
+
+      - name: Terraform validate
+        working-directory: terraform
+        run: terraform validate
+
+  dbt-check:
+    name: dbt Compile Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dbt
+        run: |
+          pip install "dbt-core==1.8.8" "dbt-snowflake==1.8.4" "protobuf<5"
+
+      - name: Check dbt project
+        working-directory: dbt/car_shopping_analytics
+        run: dbt parse

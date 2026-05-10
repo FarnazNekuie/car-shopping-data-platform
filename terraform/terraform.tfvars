@@ -1,0 +1,5 @@
+snowflake_organization_name = "GDXCNYG"
+snowflake_account_name      = "HP22684"
+snowflake_user              = "FNEKUIE"
+snowflake_password          = "Pioneer191826@!"
+snowflake_role              = "ACCOUNTADMIN"

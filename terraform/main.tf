@@ -1,8 +1,8 @@
 resource "snowflake_warehouse" "analytics_wh" {
-  name           = "CAR_SHOPPING_WH"
-  warehouse_size = "XSMALL"
-  auto_suspend   = 60
-  auto_resume    = true
+  name                = "CAR_SHOPPING_WH"
+  warehouse_size      = "XSMALL"
+  auto_suspend        = 60
+  auto_resume         = true
   initially_suspended = true
 }
 

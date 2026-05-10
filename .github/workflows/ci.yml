@@ -31,8 +31,11 @@ jobs:
         run: terraform validate
 
   dbt-check:
-    name: dbt Compile Check
+    name: dbt Parse Check
     runs-on: ubuntu-latest
+
+    env:
+      DBT_PROFILES_DIR: ./dbt/car_shopping_analytics
 
     steps:
       - name: Checkout repository
@@ -47,6 +50,24 @@ jobs:
         run: |
           pip install "dbt-core==1.8.8" "dbt-snowflake==1.8.4" "protobuf<5"
 
-      - name: Check dbt project
+      - name: Create dbt profile for CI
+        run: |
+          cat > dbt/car_shopping_analytics/profiles.yml << 'PROFILE'
+          car_shopping_analytics:
+            target: ci
+            outputs:
+              ci:
+                type: snowflake
+                account: dummy
+                user: dummy
+                password: dummy
+                role: ACCOUNTADMIN
+                database: CAR_SHOPPING_ANALYTICS
+                warehouse: CAR_SHOPPING_WH
+                schema: STAGING
+                threads: 4
+          PROFILE
+
+      - name: Parse dbt project
         working-directory: dbt/car_shopping_analytics
         run: dbt parse

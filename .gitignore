@@ -1,0 +1,29 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# dbt
+target/
+dbt_packages/
+logs/
+dbt/logs/
+
+# data
+data/raw/
+
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/terraform.tfvars
+
+# Airflow
+airflow/logs/
+airflow/airflow.db
+
+# Misc
+.env
